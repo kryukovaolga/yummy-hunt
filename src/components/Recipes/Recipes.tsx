@@ -40,8 +40,13 @@ const Recipes: React.FC = () => {
       setRecipes(Object.keys(allRecipes));
       return;
     } else {
-      const recipesWithFilter = Object.keys(allRecipes).filter((id) =>
-        allRecipes[id].name.toLowerCase().includes(query.toLowerCase())
+      const searchKeyword = query.toLowerCase();
+      const recipesWithFilter = Object.keys(allRecipes).filter(
+        (id) =>
+          allRecipes[id].name.toLowerCase().includes(searchKeyword) ||
+          allRecipes[id].ingredients.find((ingredient) =>
+            ingredient.label.toLowerCase().includes(searchKeyword)
+          )
       );
 
       setRecipes(recipesWithFilter);

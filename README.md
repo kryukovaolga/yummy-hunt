@@ -5,7 +5,7 @@
 The solution for frontend technical assessment:
 
 - View recipe list
-- Search for recipes by keyword in title
+- Search for recipes by keyword in title and ingredients
 - View recipe detail in a drawer
 - Save recipe to favorite list
 
@@ -53,7 +53,6 @@ This implementation provides a basic solution with key functionalities. Below ar
 
 - **Search Functionality:**
 
-  - Currently, the search only considers the recipe title.
   - A full-featured solution should allow searching by keywords and other attributes, with backend support.
 
 - **Recipe Detail View:**
