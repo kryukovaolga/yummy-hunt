@@ -1,6 +1,7 @@
 import { Box, Container } from "@chakra-ui/react";
 import React from "react";
 import { Header } from "../Header";
+import { Recipes } from "../Recipes";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const App: React.FC = () => {
         bgColor="white"
         role="main"
       >
-        Yummy Hunt Content
+        <Recipes />
       </Container>
     </Box>
   );
