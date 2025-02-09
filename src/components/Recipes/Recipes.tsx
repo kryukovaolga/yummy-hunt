@@ -6,6 +6,7 @@ import { Recipe } from "../../storage/mockData";
 import { FilterBar, RecipeFilter } from "./FilterBar";
 import { RecipesNoFavorites, RecipesNotFound } from "./NoRecipes";
 import { SearchBar } from "../SearchBar";
+import { RecipeDetail } from "../RecipeDetail";
 
 const allRecipes = getRecipes();
 
@@ -14,6 +15,9 @@ const Recipes: React.FC = () => {
   const [recipes, setRecipes] = useState(() => Object.keys(allRecipes));
   const [favoriteRecipes, setFavoriteRecipes] = useState<string[]>([]);
   const [filter, setFilter] = useState<RecipeFilter>("ALL");
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | undefined>(
+    undefined
+  );
 
   const toggleFavorite = (favoriteId: string) => {
     setFavoriteRecipes((prev) =>
@@ -24,7 +28,7 @@ const Recipes: React.FC = () => {
   };
 
   const onViewRecipe = (item: Recipe) => {
-    console.log("view recipe", item);
+    setSelectedRecipe(item);
   };
 
   const onFilter = (f: RecipeFilter) => {
@@ -86,6 +90,16 @@ const Recipes: React.FC = () => {
           );
         })}
       </Stack>
+
+      {/* Recipe Detail: manage as a dedicated page, routings should be set up */}
+      {selectedRecipe && (
+        <RecipeDetail
+          recipe={selectedRecipe}
+          isFavorite={favoriteRecipes.includes(selectedRecipe.name)}
+          onClose={() => setSelectedRecipe(undefined)}
+          onFavorite={toggleFavorite}
+        />
+      )}
     </VStack>
   );
 };
