@@ -5,12 +5,13 @@ import { RecipeCard } from "../RecipeCard/RecipeCard";
 import { Recipe } from "../../storage/mockData";
 import { FilterBar, RecipeFilter } from "./FilterBar";
 import { RecipesNoFavorites, RecipesNotFound } from "./NoRecipes";
+import { SearchBar } from "../SearchBar";
 
 const allRecipes = getRecipes();
 
 const Recipes: React.FC = () => {
   // todo: create hook to separate logics from ui
-  const [recipes] = useState(() => Object.keys(allRecipes));
+  const [recipes, setRecipes] = useState(() => Object.keys(allRecipes));
   const [favoriteRecipes, setFavoriteRecipes] = useState<string[]>([]);
   const [filter, setFilter] = useState<RecipeFilter>("ALL");
 
@@ -30,6 +31,19 @@ const Recipes: React.FC = () => {
     setFilter(f);
   };
 
+  const onSearch = (query?: string) => {
+    if (!query) {
+      setRecipes(Object.keys(allRecipes));
+      return;
+    } else {
+      const recipesWithFilter = Object.keys(allRecipes).filter((id) =>
+        allRecipes[id].name.toLowerCase().includes(query.toLowerCase())
+      );
+
+      setRecipes(recipesWithFilter);
+    }
+  };
+
   const data =
     filter === "FAVORITES"
       ? favoriteRecipes.filter((item) => recipes.includes(item))
@@ -45,6 +59,7 @@ const Recipes: React.FC = () => {
         justify={{ base: "center", lg: "flex-start" }}
       >
         <FilterBar filter={filter} onFilter={onFilter} />
+        <SearchBar onSearch={onSearch} />
 
         {/* todo: move no recipes into a dedicated component */}
         {filter === "ALL" && data.length === 0 && <RecipesNotFound />}
