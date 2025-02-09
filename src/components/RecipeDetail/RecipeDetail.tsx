@@ -25,7 +25,7 @@ import { FaHeart } from "react-icons/fa6";
 interface RecipeDetailProps {
   recipe: Recipe;
   isFavorite: boolean;
-  onFavorite: (name: string) => void;
+  onFavorite: (id: string) => void;
   onClose: () => void;
 }
 
@@ -56,7 +56,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
                   <IconButton
                     aria-label={isFavorite ? "Unsave Recipe" : "Save Recipe"}
                     variant="outline"
-                    onClick={() => onFavorite(recipe.name)}
+                    onClick={() => onFavorite(recipe.id)}
                     fontSize="lg"
                   >
                     <FaHeart color={isFavorite ? "red" : "gray"} />

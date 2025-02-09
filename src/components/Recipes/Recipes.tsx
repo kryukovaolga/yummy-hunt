@@ -95,7 +95,7 @@ const Recipes: React.FC = () => {
       {selectedRecipe && (
         <RecipeDetail
           recipe={selectedRecipe}
-          isFavorite={favoriteRecipes.includes(selectedRecipe.name)}
+          isFavorite={favoriteRecipes.includes(selectedRecipe.id)}
           onClose={() => setSelectedRecipe(undefined)}
           onFavorite={toggleFavorite}
         />
